@@ -362,11 +362,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rian Bergen\\Documents\\GitHub\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation.csproj",
+      "projectUniqueName": "C:\\DEV\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation.csproj",
       "projectName": "OpenGL-Gravity-Simulation",
-      "projectPath": "C:\\Users\\Rian Bergen\\Documents\\GitHub\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation.csproj",
+      "projectPath": "C:\\DEV\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation.csproj",
       "packagesPath": "C:\\Users\\Rian Bergen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rian Bergen\\Documents\\GitHub\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\obj\\",
+      "outputPath": "C:\\DEV\\OpenGL-Gravity-Simulation\\OpenGL-Gravity-Simulation\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rian Bergen\\AppData\\Roaming\\NuGet\\NuGet.Config",
