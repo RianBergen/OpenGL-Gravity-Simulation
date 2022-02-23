@@ -7,7 +7,7 @@ namespace OpenGL_Gravity_Simulation
         static void Main(string[] args)
         {
             // Start and Run the 
-            Rendering.GLWindow application = new Rendering.GLWindow("OpenGLGravity Simulation", 1280, 720, false);
+            Rendering.OpenGLWindow application = new Rendering.OpenGLWindow("OpenGLGravity Simulation", 1280, 720, false);
 
             application.Run();
         }

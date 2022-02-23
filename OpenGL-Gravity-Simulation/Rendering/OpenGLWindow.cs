@@ -12,7 +12,7 @@ namespace OpenGL_Gravity_Simulation.Rendering
     /// <summary>
     /// OpenGL Window Class
     /// </summary>
-    public class GLWindow
+    class OpenGLWindow
     {
         /*
          * 
@@ -23,7 +23,7 @@ namespace OpenGL_Gravity_Simulation.Rendering
         /// <summary>
         /// Container for OpenTK Window
         /// </summary>
-        private GameWindow GLGameWindow;
+        private GameWindow OpenGLGameWindow;
 
         /// <summary>
         /// Window Title
@@ -40,8 +40,9 @@ namespace OpenGL_Gravity_Simulation.Rendering
         /// </summary>
         private int Height;
 
-        // TO DO: Move this to Game
-        private ShaderProgram shaderProgram;
+        private Game.Game CurrentGame;
+
+
 
 
 
@@ -58,7 +59,7 @@ namespace OpenGL_Gravity_Simulation.Rendering
         /// <param name="width">Window Width</param>
         /// <param name="height">Window Height</param>
         /// <param name="macOSCompatible">OpenGL 4.1 if True, OpenGL 4.6 if False</param>
-        public GLWindow(string title, int width, int height, bool macOSCompatible)
+        public OpenGLWindow(string title, int width, int height, bool macOSCompatible)
         {
             // Save Variables
             if (title == "")
@@ -89,13 +90,13 @@ namespace OpenGL_Gravity_Simulation.Rendering
             nws.Title = this.Title;
 
             // Create Game Window
-            this.GLGameWindow = new GameWindow(gws, nws);
+            this.OpenGLGameWindow = new GameWindow(gws, nws);
 
             // Setup Event Callbacks
-            this.GLGameWindow.Load += () => { this.OnLoad(); }; // Load Window Callback
-            this.GLGameWindow.UpdateFrame += (FrameEventArgs e) => { this.UpdateFrame(e); }; // Update Frame Callback
-            this.GLGameWindow.RenderFrame += (FrameEventArgs e) => { this.RenderFrame(e); }; // Render Frame Callback
-            this.GLGameWindow.Resize += (ResizeEventArgs e) => { this.ResizeViewport(e); }; // Resize Viewport Callback
+            this.OpenGLGameWindow.Load += () => { this.OnLoad(); }; // Load Window Callback
+            this.OpenGLGameWindow.UpdateFrame += (FrameEventArgs e) => { this.UpdateFrame(e); }; // Update Frame Callback
+            this.OpenGLGameWindow.RenderFrame += (FrameEventArgs e) => { this.RenderFrame(e); }; // Render Frame Callback
+            this.OpenGLGameWindow.Resize += (ResizeEventArgs e) => { this.ResizeViewport(e); }; // Resize Viewport Callback
 
             // Print Information
             Console.WriteLine("---------------------------------------------------------------------------");
@@ -107,10 +108,13 @@ namespace OpenGL_Gravity_Simulation.Rendering
             Console.WriteLine("---------------------------------------------------------------------------");
         }
 
-        ~GLWindow()
+        /// <summary>
+        /// Default Destructor
+        /// </summary>
+        ~OpenGLWindow()
         {
             // Dispose of Window Object
-            this.GLGameWindow.Dispose();
+            this.OpenGLGameWindow.Dispose();
         }
 
         /// <summary>
@@ -119,8 +123,18 @@ namespace OpenGL_Gravity_Simulation.Rendering
         public void Run()
         {
             // Run The Game
-            this.GLGameWindow.Run();
+            this.OpenGLGameWindow.Run();
         }
+
+
+
+
+
+        /*
+         * 
+         * Private Functions
+         * 
+         */
 
         /// <summary>
         /// Gets Called Before Window Is Displayed, and After OpenGL Has Been Loaded
@@ -130,12 +144,8 @@ namespace OpenGL_Gravity_Simulation.Rendering
             // Set GL Clear Color
             GL.ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
-            // TO DO: Move this to Game
-            shaderProgram = new ShaderProgram();
-            shaderProgram.LoadShaderProgram("../../../../Shaders/SimpleVertexShader.glsl", "../../../../Shaders/SimpleFragmentShader.glsl");
-
-            // Load Any Assets
-
+            // Initialize Current Game
+            CurrentGame = new Game.GravitySimulation();
         }
 
         /// <summary>
@@ -144,8 +154,8 @@ namespace OpenGL_Gravity_Simulation.Rendering
         /// <param name="e">Provided By OpenTK</param>
         private void UpdateFrame(FrameEventArgs e)
         {
-            // Update Logic
-
+            // Update Game Logic
+            CurrentGame.Update(e.Time);
         }
 
         /// <summary>
@@ -157,13 +167,11 @@ namespace OpenGL_Gravity_Simulation.Rendering
             // Clear Buffer
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            // Draw
-            GL.UseProgram(this.shaderProgram.GetID());
-
-
+            // Draw Game
+            CurrentGame.Render();
 
             // Swap Buffer
-            this.GLGameWindow.SwapBuffers();
+            this.OpenGLGameWindow.SwapBuffers();
         }
 
         /// <summary>

@@ -6,7 +6,7 @@
     <RootNamespace>OpenGL_Gravity_Simulation</RootNamespace>
     <Platforms>x64</Platforms>
     <StartupObject>OpenGL_Gravity_Simulation.Program</StartupObject>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <EnableNETAnalyzers>false</EnableNETAnalyzers>
   </PropertyGroup>
 
@@ -22,6 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="4.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rendering\Models\" />
   </ItemGroup>
 
 </Project>
